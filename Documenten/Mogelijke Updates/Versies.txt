@@ -1,0 +1,8 @@
+qa v1.79
+1. Ondersteuning voor het exporteren van *.csv (Comma Separated Value) bestanden.
+
+qa v1.80
+1. Ondersteuning voor haakjes ("()") in de verbindingsinformatie.
+2. Aanhalingstekens om bestandsverwijzingen in foutmeldingen.
+3. Commentaar bij enumeration elementen.
+4. Consequent gebruik van decimalen en hexadecimalen.

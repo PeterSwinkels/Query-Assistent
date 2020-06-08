@@ -1,0 +1,107 @@
+' Handleiding:
+'.csv	"Comma Separated Values" bestand.
+'
+
+Private Const CSV_SCHEIDINGSTEKEN As String = ";"                  'Scheidt kolommen in CSV bestanden.
+
+'Deze procedure exporteert het queryresultaat naar een tekstbestand.
+Private Function ExporteerAlsTekst(ExportPad As String, Optional CSV As Boolean = False) As Boolean
+On Error GoTo Fout
+Dim BestandsHandle As Long
+Dim EersteResultaat As Long
+Dim ExportAfgebroken As Boolean
+Dim Kolom As Long
+Dim LaatsteResultaat As Long
+Dim ResultaatIndex As Long
+Dim Rij As Long
+
+   ExportAfgebroken = False
+   QueryResultaten , , , EersteResultaat, LaatsteResultaat
+
+   BestandsHandle = FreeFile()
+   Open ExportPad For Output Lock Read Write As BestandsHandle
+      For ResultaatIndex = EersteResultaat To LaatsteResultaat
+         With QueryResultaten(, , ResultaatIndex)
+            If Not ControleerOpAPIFout(SafeArrayGetDim(.Tabel())) = 0 Then
+               If Not LaatsteResultaat = EersteResultaat Then Print #BestandsHandle, "[Resultaat: #" & CStr((ResultaatIndex - EersteResultaat) + 1) & "]"
+               For Rij = LBound(.Tabel(), 1) To UBound(.Tabel(), 1)
+                  For Kolom = LBound(.Tabel(), 2) To UBound(.Tabel(), 2)
+                     If CSV Then
+                        If InStr(.Tabel(Rij, Kolom), CSV_SCHEIDINGSTEKEN) Then
+                           Print #BestandsHandle, """"; Replace(.Tabel(Rij, Kolom), """", """"""); """"; CSV_SCHEIDINGSTEKEN;
+                        Else
+                           Print #BestandsHandle, .Tabel(Rij, Kolom); CSV_SCHEIDINGSTEKEN;
+                        End If
+                     Else
+                        If Instellingen().ExportKolomAanvullen Then
+                           Print #BestandsHandle, VulAan(.Tabel(Rij, Kolom), .KolomBreedte(Kolom), .RechtsUitlijnen(Kolom)) & " ";
+                        Else
+                           Print #BestandsHandle, .Tabel(Rij, Kolom); vbTab;
+                        End If
+                     End If
+                  Next Kolom
+                  Print #BestandsHandle,
+               Next Rij
+            End If
+         End With
+      Next ResultaatIndex
+EindeProcedure:
+   Close BestandsHandle
+
+   ExporteerAlsTekst = ExportAfgebroken
+   Exit Function
+
+Fout:
+   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Export pad: ", Pad:=ExportPad) = vbIgnore Then
+      ExportAfgebroken = True
+      Resume EindeProcedure
+   End If
+   If HandelFoutAf() = vbRetry Then Resume
+End Function
+
+'Deze procedure exporteert het queryresultaat.
+Public Function ExporteerResultaat(ExportPad As String) As Boolean
+On Error GoTo Fout
+Dim BestandsType As String
+Dim ExportAfgebroken As Boolean
+
+   ExportAfgebroken = False
+   BestandsType = LCase$(Trim$("." & BestandsSysteem().GetExtensionName(ExportPad)))
+
+   If BestandsSysteem().FileExists(ExportPad) Then
+      If Not Instellingen().ExportAutoOverschrijven Then
+         If MsgBox("Het bestand """ & ExportPad & """ bestaat al. Overschrijven?", vbQuestion Or vbYesNo Or vbDefaultButton2) = vbNo Then ExportAfgebroken = True
+      End If
+
+      If Not ExportAfgebroken Then
+         If BestandsType = ".xls" Or BestandsType = ".xlsx" Then SluitExcelWerkmap ExportPad
+         Kill ExportPad
+      End If
+   End If
+
+   If Not ExportAfgebroken Then
+      Select Case BestandsType
+         Case ".csv"
+            ExportAfgebroken = ExporteerAlsTekst(ExportPad, CSV:=True)
+         Case ".xls"
+            ExportAfgebroken = ExporteerNaarExcel(ExportPad, xlWorkbookNormal)
+         Case ".xlsx"
+            ExportAfgebroken = ExporteerNaarExcel(ExportPad, xlWorkbookDefault)
+         Case Else
+            ExportAfgebroken = ExporteerAlsTekst(ExportPad)
+      End Select
+   End If
+
+EindeProcedure:
+   ExporteerResultaat = Not ExportAfgebroken
+   Exit Function
+
+Fout:
+   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then
+      ExportAfgebroken = True
+      Resume EindeProcedure
+   End If
+   If HandelFoutAf() = vbRetry Then Resume
+End Function
+
+
