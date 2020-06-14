@@ -1,22 +1,22 @@
 VERSION 5.00
 Begin VB.Form InterfaceVenster 
    BorderStyle     =   1  'Fixed Single
-   ClientHeight    =   8172
-   ClientLeft      =   48
-   ClientTop       =   612
-   ClientWidth     =   9264
+   ClientHeight    =   8175
+   ClientLeft      =   45
+   ClientTop       =   615
+   ClientWidth     =   9270
    Icon            =   "Interface.frx":0000
    KeyPreview      =   -1  'True
    MaxButton       =   0   'False
-   ScaleHeight     =   681
+   ScaleHeight     =   545
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   772
+   ScaleWidth      =   618
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox StatusVeld 
       BackColor       =   &H8000000F&
       BeginProperty Font 
          Name            =   "Fixedsys"
-         Size            =   7.2
+         Size            =   9
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -38,7 +38,7 @@ Begin VB.Form InterfaceVenster
       ClipControls    =   0   'False
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -54,7 +54,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "Resultaat &Exporteren"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -71,7 +71,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "&Open resultaat na export."
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -95,7 +95,7 @@ Begin VB.Form InterfaceVenster
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -114,7 +114,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "Maak e-&mail met export bijgevoegd."
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -131,7 +131,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "&Automatisch resultaat exporteren na query."
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -148,7 +148,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "Exporteer resultaat naar:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -166,7 +166,7 @@ Begin VB.Form InterfaceVenster
       Caption         =   "Query"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -183,7 +183,7 @@ Begin VB.Form InterfaceVenster
          Default         =   -1  'True
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -207,7 +207,7 @@ Begin VB.Form InterfaceVenster
       Begin VB.CommandButton QuerySelecterenKnop 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -226,7 +226,7 @@ Begin VB.Form InterfaceVenster
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -245,7 +245,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "Parameters"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -269,9 +269,9 @@ Begin VB.Form InterfaceVenster
             BorderStyle     =   0  'None
             Height          =   975
             Left            =   120
-            ScaleHeight     =   81
+            ScaleHeight     =   65
             ScaleMode       =   3  'Pixel
-            ScaleWidth      =   301
+            ScaleWidth      =   241
             TabIndex        =   16
             TabStop         =   0   'False
             Top             =   240
@@ -291,7 +291,7 @@ Begin VB.Form InterfaceVenster
                Caption         =   "Parameter:"
                BeginProperty Font 
                   Name            =   "MS Sans Serif"
-                  Size            =   7.8
+                  Size            =   8.25
                   Charset         =   0
                   Weight          =   700
                   Underline       =   0   'False
@@ -312,7 +312,7 @@ Begin VB.Form InterfaceVenster
          Caption         =   "Query:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   7.8
+            Size            =   8.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -330,7 +330,7 @@ Begin VB.Form InterfaceVenster
       Caption         =   "Resultaat"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -345,7 +345,7 @@ Begin VB.Form InterfaceVenster
       Begin VB.TextBox QueryResultaatVeld 
          BeginProperty Font 
             Name            =   "Fixedsys"
-            Size            =   7.2
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -429,7 +429,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -466,7 +466,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -544,7 +544,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -604,7 +604,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -630,7 +630,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -650,7 +650,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -678,7 +678,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -692,7 +692,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -712,7 +712,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -739,7 +739,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -768,7 +768,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -780,7 +780,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -800,7 +800,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -816,7 +816,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -835,7 +835,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -892,7 +892,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -908,7 +908,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -921,7 +921,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -933,7 +933,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -945,7 +945,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -972,7 +972,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -988,7 +988,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1008,7 +1008,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1020,7 +1020,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1032,7 +1032,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 

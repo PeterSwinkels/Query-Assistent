@@ -2,25 +2,25 @@ VERSION 5.00
 Begin VB.Form InloggenVenster 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Inloggen"
-   ClientHeight    =   1332
-   ClientLeft      =   48
-   ClientTop       =   336
-   ClientWidth     =   3972
+   ClientHeight    =   1335
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   3975
    ControlBox      =   0   'False
    Icon            =   "Inloggen.frx":0000
    KeyPreview      =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5.55
+   ScaleHeight     =   5.563
    ScaleMode       =   4  'Character
-   ScaleWidth      =   33.1
+   ScaleWidth      =   33.125
    ShowInTaskbar   =   0   'False
    Begin VB.CommandButton AnnulerenKnop 
       Cancel          =   -1  'True
       Caption         =   "&Annuleren"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -38,7 +38,7 @@ Begin VB.Form InloggenVenster
       Default         =   -1  'True
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -77,7 +77,7 @@ Begin VB.Form InloggenVenster
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -96,7 +96,7 @@ Begin VB.Form InloggenVenster
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -126,7 +126,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -150,7 +150,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -171,7 +171,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume EindeProcedure
 End Sub
 

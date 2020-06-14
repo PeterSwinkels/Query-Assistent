@@ -30,7 +30,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -55,7 +55,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -76,7 +76,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -90,7 +90,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -111,7 +111,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -128,7 +128,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -141,7 +141,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 

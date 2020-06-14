@@ -27,16 +27,16 @@ Private Type OPENFILENAME
 End Type
 
 Public Const SW_SHOWNORMAL As Long = 1
-Private Const CDLOFNEXPLORER As Long = &H80000
-Private Const CDLOFNFILEMUSTEXIST  As Long = &H1000&
-Private Const CDLOFNHIDEREADONLY As Long = &H4&
-Private Const CDLOFNLONGNAMES As Long = &H200000
-Private Const CDLOFNNOCHANGEDIR As Long = &H8&
-Private Const CDLOFNPATHMUSTEXIST  As Long = &H800&
 Private Const ERROR_SUCCESS As Long = 0
 Private Const FORMAT_MESSAGE_ARGUMENT_ARRAY As Long = &H2000&
 Private Const FORMAT_MESSAGE_FROM_SYSTEM As Long = &H1000&
 Private Const MAX_STRING As Long = 65535
+Private Const OFN_EXPLORER As Long = &H80000
+Private Const OFN_FILEMUSTEXIST  As Long = &H1000&
+Private Const OFN_HIDEREADONLY As Long = &H4&
+Private Const OFN_LONGNAMES As Long = &H200000
+Private Const OFN_NOCHANGEDIR As Long = &H8&
+Private Const OFN_PATHMUSTEXIST  As Long = &H800&
 
 Public Declare Function ShellExecuteA Lib "Shell32.dll" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 Private Declare Function FormatMessageA Lib "Kernel32.dll" (ByVal dwFlags As Long, lpSource As Long, ByVal dwBerichtId As Long, ByVal dwLanguageId As Long, ByVal lpBuffer As String, ByVal nSize As Long, Arguments As Long) As Long
@@ -156,7 +156,7 @@ EindeProcedure:
 
 Fout:
    Aantal = ONBEKEND_AANTAL
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -170,7 +170,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -183,7 +183,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -242,7 +242,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=InstellingenPad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=InstellingenPad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -277,7 +277,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -314,7 +314,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -359,7 +359,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Export pad: ", Pad:=ExportPad) = vbIgnore Then
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Export pad: ", Pad:=ExportPad) = vbIgnore Then
       ExportAfgebroken = True
       Resume EindeProcedure
    End If
@@ -445,7 +445,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Export pad: ", Pad:=ExportPad) = vbIgnore Then
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Export pad: ", Pad:=ExportPad) = vbIgnore Then
       ExportAfgebroken = True
       Resume EindeProcedure
    End If
@@ -488,7 +488,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then
       ExportAfgebroken = True
       Resume EindeProcedure
    End If
@@ -523,13 +523,13 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
 
 'Deze procedure handelt eventuele fouten af.
-Public Function HandelFoutAf(Optional VraagNietOmKeuze As Boolean = True, Optional TypePad As String = vbNullString, Optional Pad As String = vbNullString, Optional ExtraInformatie As String = vbNullString) As Long
+Public Function HandelFoutAf(Optional VraagVorigeKeuzeOp As Boolean = True, Optional TypePad As String = vbNullString, Optional Pad As String = vbNullString, Optional ExtraInformatie As String = vbNullString) As Long
 Dim Bericht As String
 Dim Bron As String
 Dim FoutCode As Long
@@ -543,7 +543,7 @@ Static Keuze As Long
 
    On Error Resume Next
 
-   If Not VraagNietOmKeuze Then
+   If Not VraagVorigeKeuzeOp Then
       Bericht = MaakFoutOmschrijvingOp(FoutOmschrijving) & vbCr
       Bericht = Bericht & "Foutcode: " & CStr(FoutCode)
       If Not Bron = vbNullString Then Bericht = Bericht & vbCr & "Bron: " & Bron
@@ -583,7 +583,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -606,7 +606,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -622,7 +622,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -634,7 +634,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -658,7 +658,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -671,7 +671,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -694,7 +694,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -724,7 +724,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -830,7 +830,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=InstellingenPad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=InstellingenPad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 'Deze procedure stuurt de waarde en de naam van een instellingen parameter in de opgegeven regel terug.
@@ -852,7 +852,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -864,7 +864,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -954,7 +954,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -993,7 +993,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 'Deze procedure controleert de queryparameter invoer en stuurt eventueel de index van een onjuist ingevuld veld en een fout omschrijving terug.
@@ -1041,7 +1041,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1108,7 +1108,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1143,7 +1143,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1168,7 +1168,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1191,7 +1191,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1218,7 +1218,7 @@ EindeProcedure:
 Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1234,7 +1234,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1268,7 +1268,7 @@ EindeProcedure:
 Fout:
    HuidigeQuery.Geopend = False
 
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Query pad: ", Pad:=QueryPad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Query pad: ", Pad:=QueryPad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1347,12 +1347,12 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
 'Deze procedure handelt eventuele queryresultaat lees fouten af.
-Public Function QueryResultaatLeesFout(Optional Rij As Long = 0, Optional Kolom As Long = 0, Optional KolomNaam As String = vbNullString, Optional VraagNietOmKeuze As Boolean = True) As Long
+Public Function QueryResultaatLeesFout(Optional Rij As Long = 0, Optional Kolom As Long = 0, Optional KolomNaam As String = vbNullString, Optional VraagVorigeKeuzeOp As Boolean = True) As Long
 Dim Bericht As String
 Dim Bron As String
 Dim FoutCode As Long
@@ -1366,7 +1366,7 @@ Static Keuze As Long
 
    On Error Resume Next
 
-   If Not VraagNietOmKeuze Then
+   If Not VraagVorigeKeuzeOp Then
       Bericht = "Er is een fout opgetreden bij het uitlezen van het queryresultaat." & vbCr
       Bericht = Bericht & "Rij: " & CStr(Rij) & vbCr
       Bericht = Bericht & "Kolom: " & CStr(Kolom) & vbCr
@@ -1429,7 +1429,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1507,12 +1507,12 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 Exit Function
 
 LeesFout:
-   If QueryResultaatLeesFout(Rij, Kolom, TijdelijkeTabel(Kolom, 0), VraagNietOmKeuze:=False) = vbAbort Then Resume EindeUitlezen
+   If QueryResultaatLeesFout(Rij, Kolom, TijdelijkeTabel(Kolom, 0), VraagVorigeKeuzeOp:=False) = vbAbort Then Resume EindeUitlezen
    If QueryResultaatLeesFout() = vbIgnore Then Resume VolgendeWaarde
    If QueryResultaatLeesFout() = vbRetry Then Resume
 End Function
@@ -1529,7 +1529,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1553,7 +1553,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1572,7 +1572,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1588,7 +1588,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Pad: ", Pad:=Pad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Pad: ", Pad:=Pad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1627,7 +1627,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1672,7 +1672,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1686,7 +1686,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1704,7 +1704,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1732,7 +1732,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1748,7 +1748,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -1777,7 +1777,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1794,7 +1794,7 @@ EindeProcedure:
 
 Fout:
    Geopend = False
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1838,7 +1838,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1870,7 +1870,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=BatchInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=BatchInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1914,7 +1914,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=ExportInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=ExportInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1947,7 +1947,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -1981,7 +1981,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=QueryInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=QueryInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2009,7 +2009,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Sessielijst: ", Pad:=HuidigeSessieLijstPad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Sessielijst: ", Pad:=HuidigeSessieLijstPad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2101,7 +2101,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, TypePad:="Instellingenbestand: ", Pad:=VoorbeeldInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, TypePad:="Instellingenbestand: ", Pad:=VoorbeeldInstellingen.Bestand, ExtraInformatie:="Sectie: " & Sectie & vbCr & "Regel: " & Regel) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2119,7 +2119,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2188,7 +2188,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2322,7 +2322,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -2368,7 +2368,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False, ExtraInformatie:="Query: " & QueryPad) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False, ExtraInformatie:="Query: " & QueryPad) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -2413,7 +2413,7 @@ EindeProcedure:
    Exit Sub
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
@@ -2445,11 +2445,11 @@ Dim NieuwExportPad As String
       .nMaxFile = Len(.lpstrFile)
       .nMaxFileTitle = Len(.lpstrFileTitle)
 
-      .flags = CDLOFNEXPLORER
-      .flags = .flags Or CDLOFNHIDEREADONLY
-      .flags = .flags Or CDLOFNLONGNAMES
-      .flags = .flags Or CDLOFNNOCHANGEDIR
-      .flags = .flags Or CDLOFNPATHMUSTEXIST
+      .flags = OFN_EXPLORER
+      .flags = .flags Or OFN_HIDEREADONLY
+      .flags = .flags Or OFN_LONGNAMES
+      .flags = .flags Or OFN_NOCHANGEDIR
+      .flags = .flags Or OFN_PATHMUSTEXIST
       .lpstrTitle = "Exporteer het queryresultaat naar:" & vbNullChar
       .lpstrFilter = "Tekstbestand (*.txt)" & vbNullChar & "*.txt" & vbNullChar
       .lpstrFilter = .lpstrFilter & "Microsoft Excel bestand (*.xls)" & vbNullChar & "*.xls" & vbNullChar
@@ -2464,7 +2464,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2494,12 +2494,12 @@ Dim QueryPadDialoog As OPENFILENAME
       .nMaxFile = Len(.lpstrFile)
       .nMaxFileTitle = Len(.lpstrFileTitle)
 
-      .flags = CDLOFNEXPLORER
-      .flags = .flags Or CDLOFNFILEMUSTEXIST
-      .flags = .flags Or CDLOFNHIDEREADONLY
-      .flags = .flags Or CDLOFNLONGNAMES
-      .flags = .flags Or CDLOFNNOCHANGEDIR
-      .flags = .flags Or CDLOFNPATHMUSTEXIST
+      .flags = OFN_EXPLORER
+      .flags = .flags Or OFN_FILEMUSTEXIST
+      .flags = .flags Or OFN_HIDEREADONLY
+      .flags = .flags Or OFN_LONGNAMES
+      .flags = .flags Or OFN_NOCHANGEDIR
+      .flags = .flags Or OFN_PATHMUSTEXIST
       .lpstrTitle = "Selecteer een query:" & vbNullChar
       .lpstrFilter = "Tekstbestanden (*.txt)" & vbNullChar & "*.txt" & vbNullChar
       .lpstrFilter = .lpstrFilter & vbNullChar
@@ -2513,7 +2513,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2536,7 +2536,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2559,7 +2559,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
@@ -2596,7 +2596,7 @@ EindeProcedure:
    Exit Function
 
 Fout:
-   If HandelFoutAf(VraagNietOmKeuze:=False) = vbIgnore Then Resume EindeProcedure
+   If HandelFoutAf(VraagVorigeKeuzeOp:=False) = vbIgnore Then Resume EindeProcedure
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
