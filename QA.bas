@@ -247,7 +247,7 @@ Fout:
 End Sub
 
 'Deze procedure controleert of er een fout is opgetreden tijdens de recenste API functie aanroep.
-Public Function ControleerOpAPIFout(TerugGestuurd As Long, Optional ExtraInformatie As String = Empty) As Long
+Public Function ControleerOpAPIFout(TerugGestuurd As Long, Optional ExtraInformatie As String = vbNullString) As Long
 Dim Bericht As String
 Dim FoutCode As Long
 Dim Lengte As Long
