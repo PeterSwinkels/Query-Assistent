@@ -13,12 +13,12 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Deze module bevat de Microsoft Outlook gerelateerde procedures.
 Option Explicit
-Private WithEvents EMail As Outlook.MailItem          'Bevat een verwijzing naar een Microsoft Outlook e-mail bericht.
+Private WithEvents EMail As Outlook.MailItem          'Bevat een verwijzing naar een Microsoft Outlook e-mailbericht.
 Attribute EMail.VB_VarHelpID = -1
 Private WithEvents MSOutlook As Outlook.Application   'Bevat een verwijzing naar Microsoft Outlook.
 Attribute MSOutlook.VB_VarHelpID = -1
 
-'Deze procedure beheert de Microsoft Outlook status informatie.
+'Deze procedure beheert de Microsoft Outlook statusinformatie.
 Private Function OutlookReedsActief(Optional NieuweOutlookReedsActief As Variant) As Boolean
 On Error GoTo Fout
 Static HuidigeOutlookReedsActief As Boolean
@@ -35,7 +35,7 @@ Fout:
 End Function
 
 
-'Deze procedure voegt de opgegeven geëxporteerde query resultaten toe aan een e-mail.
+'Deze procedure voegt de opgegeven geëxporteerde queryresultaten toe aan een e-mail.
 Public Sub VoegQueryResultatenToe(Optional ExportPad As Variant = vbNullString, Optional ExportPaden As Collection = Nothing)
 On Error GoTo Fout
 

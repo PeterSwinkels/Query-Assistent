@@ -682,7 +682,7 @@ Fout:
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
-'Deze procedure geeft de opdracht om de gebruiker te verzoeken een export pad op te geven.
+'Deze procedure geeft de opdracht om de gebruiker te verzoeken een exportpad op te geven.
 Private Sub ExportPadSelecterenKnop_Click()
 On Error GoTo Fout
    ExportPadVeld.Text = VraagExportPad(ExportPadVeld.Text)

@@ -2,7 +2,7 @@ Attribute VB_Name = "QAModule"
 'Deze module bevat de hoofdprocedures van dit programma.
 Option Explicit
 
-'De door dit programma gebruikte Microsoft Windows API constanten, functies en structuren.
+'De door dit programma gebruikte Microsoft Windows API-constanten, -functies en -structuren.
 Private Type OPENFILENAME
    lStructSize As Long
    hwndOwner As Long
@@ -58,74 +58,74 @@ End Enum
 
 'Bevat de definities voor de instellingen van dit programma.
 Public Type InstellingenDefinitie
-   BatchBereik As String              'Bevat de volgnummers van de eerste en de laatste query in een uit te voeren batch.
-   BatchInteractief As Boolean        'Geeft aan of de gebruiker eerst parameters moet invoeren voordat een batch uitgevoerd kan worden.
-   BatchQueryPad As String            'Bevat het pad en/of de bestandsnaam zonder volgnummers van de query's in een uit te voeren batch.
-   Bestand As String                  'Bevat het pad en/of de bestandsnaam van het programmainstellingenbestand.
-   EMailTekst As String               'Bevat de tekst van de e-mail met de geëxporteerde resultaten.
-   ExportAfzender As String           'Bevat de naam van de afzender van de e-mail met de geëxporteerde resultaten.
-   ExportAutoOpenen As Boolean        'Geeft aan of een export automatisch na het exporteren geopend wordt.
-   ExportAutoOverschrijven As Boolean 'Geeft aan of een bestand automatisch overschreven wordt bij het exporteren van de queryresultaataten.
-   ExportAutoVerzenden As Boolean     'Geeft aan of de e-mail met de geëxporteerde resultaten automatisch verzonden wordt.
-   ExportCCOntvanger As String        'Bevat het e-mail adres van de ontvanger van het kopie van de e-mail met de geëxporteerde resultaten.
-   ExportKolomAanvullen As Boolean    'Geeft aan of de data in een kolom moet worden aangevuld met spaties.
-   ExportOnderwerp As String          'Bevat het onderwerp van de e-mail met de geëxporteerde resultaten.
-   ExportOntvanger As String          'Bevat het e-mail adres van de ontvanger van de e-mail met de geëxporteerde resultaten.
-   ExportStandaardPad As String       'Bevat het standaardpad voor het exporteren van queryresultaataten.
-   QueryAutoSluiten As Boolean        'Geeft aan of dit programma na het uitvoeren van een query en een eventuele export automatisch afgesloten wordt.
-   QueryAutoUitvoeren As Boolean      'Geeft aan of een query automatisch uitgevoerd wordt na het laden.
-   QueryRecordSets As Boolean         'Geeft aan of er meer dan een recordset kan worden teruggestuurd door de database als het resultaat van een query.
-   QueryTimeout As Long               'Bevat het aantal seconden dat het programma wacht op het queryresultaat nadat opdracht is gegeven de query uit te voeren.
-   VoorbeeldKolomBreedte As Long      'Bevat de maximale kolombreedte die gebruikt wordt om het queryresultaat te tonen in het voorbeeld venster.
-   VoorbeeldRegels As Long            'Bevat het maximum aantal regels dat van het queryresultaat wordt getoond in het voorbeeld venster.
-   VerbindingsInformatie As String    'Bevat de voor de verbinding met een database noodzakelijke gegevens.
+   BatchBereik As String              'Definieert de volgnummers van de eerste en de laatste query in een uit te voeren batch.
+   BatchInteractief As Boolean        'Definieert of de gebruiker eerst parameters moet invoeren voordat een batch uitgevoerd kan worden.
+   BatchQueryPad As String            'Definieert het pad en/of de bestandsnaam zonder volgnummers van de query's in een uit te voeren batch.
+   Bestand As String                  'Definieert het pad en/of de bestandsnaam van het programmainstellingenbestand.
+   EMailTekst As String               'Definieert de tekst van de e-mail met de geëxporteerde resultaten.
+   ExportAfzender As String           'Definieert de naam van de afzender van de e-mail met de geëxporteerde resultaten.
+   ExportAutoOpenen As Boolean        'Definieert of een export automatisch na het exporteren geopend wordt.
+   ExportAutoOverschrijven As Boolean 'Definieert of een bestand automatisch overschreven wordt bij het exporteren van de queryresultaataten.
+   ExportAutoVerzenden As Boolean     'Definieert of de e-mail met de geëxporteerde resultaten automatisch verzonden wordt.
+   ExportCCOntvanger As String        'Definieert het e-mail adres van de ontvanger van het kopie van de e-mail met de geëxporteerde resultaten.
+   ExportKolomAanvullen As Boolean    'Definieert of de data in een kolom moet worden aangevuld met spaties.
+   ExportOnderwerp As String          'Definieert het onderwerp van de e-mail met de geëxporteerde resultaten.
+   ExportOntvanger As String          'Definieert het e-mail adres van de ontvanger van de e-mail met de geëxporteerde resultaten.
+   ExportStandaardPad As String       'Definieert het standaardpad voor het exporteren van queryresultaataten.
+   QueryAutoSluiten As Boolean        'Definieert of dit programma na het uitvoeren van een query en een eventuele export automatisch afgesloten wordt.
+   QueryAutoUitvoeren As Boolean      'Definieert of een query automatisch uitgevoerd wordt na het laden.
+   QueryRecordSets As Boolean         'Definieert of er meer dan een recordset kan worden teruggestuurd door de database als het resultaat van een query.
+   QueryTimeout As Long               'Definieert het aantal seconden dat het programma wacht op het queryresultaat nadat opdracht is gegeven de query uit te voeren.
+   VoorbeeldKolomBreedte As Long      'Definieert de maximale kolombreedte die gebruikt wordt om het queryresultaat te tonen in het voorbeeld venster.
+   VoorbeeldRegels As Long            'Definieert het maximum aantal regels dat van het queryresultaat wordt getoond in het voorbeeld venster.
+   VerbindingsInformatie As String    'Defines de voor de verbinding met een database noodzakelijke gegevens.
 End Type
 
 'Bevat de definities voor de opdrachtregelparameters die eventueel zijn opgegeven bij het starten van dit programma.
 Public Type OpdrachtRegelParametersDefinitie
-   InstellingenPad As String   'Bevat het opgegeven instellingenpad.
-   QueryPad As String          'Bevat het opgegeven querypad.
-   SessiesPad As String        'Bevat het opgegeven sessielijstpad.
-   Verwerkt As Boolean         'Geeft aan of de opdrachtregelparameters zonder fouten zijn verwerkt.
+   InstellingenPad As String   'Definieert het opgegeven instellingenpad.
+   QueryPad As String          'Definieert het opgegeven querypad.
+   SessiesPad As String        'Definieert het opgegeven sessielijstpad.
+   Verwerkt As Boolean         'Definieert of de opdrachtregelparameters zonder fouten zijn verwerkt.
 End Type
 
 'Bevat de definities voor een query.
 Public Type QueryDefinitie
-   Code As String              'De code van een query.
-   Pad As String               'Het pad van een query bestand.
-   Geopend As Boolean          'Geeft aan of het query bestand kon worden geopend.
+   Code As String              'Defines de code van een query.
+   Pad As String               'Defines het pad van een querybestand.
+   Geopend As Boolean          'Definieert of het querybestand kon worden geopend.
 End Type
 
 'Bevat de definities voor de parameter gegevens van de geselecteerde query.
 Public Type QueryParameterDefinitie
-   Commentaar As String        'Het commentaar bij de parameter.
-   Invoer As String            'De invoer van de gebruiker.
-   Lengte As Long              'De lengte van de parameterdefinitie.
-   LengteIsVariabel As Boolean 'Geeft aan of de lengte van de invoer variabel is.
-   Masker As String            'Het invoer masker van de parameter.
-   ParameterNaam As String     'De naam van de parameter.
-   Positie As Long             'De positie relatief ten op zichte van de vorige definitie.
-   StandaardWaarde As String   'De standaardwaarde van de parameter.
-   VeldIsZichtbaar As Boolean  'Geeft aan of het invoer veld zichtbaar is.
+   Commentaar As String        'Definieert het commentaar bij de parameter.
+   Invoer As String            'Definieert de invoer van de gebruiker.
+   Lengte As Long              'Definieert de lengte van de parameterdefinitie.
+   LengteIsVariabel As Boolean 'Definieert of de lengte van de invoer variabel is.
+   Masker As String            'Definieert het invoer masker van de parameter.
+   ParameterNaam As String     'Definieert de naam van de parameter.
+   Positie As Long             'Definieert de positie relatief ten op zichte van de vorige definitie.
+   StandaardWaarde As String   'Definieert de standaardwaarde van de parameter.
+   VeldIsZichtbaar As Boolean  'Definieert of het invoer veld zichtbaar is.
 End Type
 
 'Bevat de definities voor het resultaat van een query.
 Public Type QueryResultaatDefinitie
-   KolomBreedte() As Long       'Geeft per kolom de maximale breedte in bytes van de gegevens aan.
-   RechtsUitlijnen() As Boolean 'Geeft per kolom aan of de gegevens rechtsuitgelijnd worden bij weergave.
-   Tabel() As String            'Bevat de door een query opgevraagde gegevens uit een database.
+   KolomBreedte() As Long       'Definieert per kolom de maximale breedte in bytes van de gegevens.
+   RechtsUitlijnen() As Boolean 'Definieert per kolom of de gegevens rechtsuitgelijnd worden bij weergave.
+   Tabel() As String            'Definieert de door een query opgevraagde gegevens uit een database.
 End Type
 
 Public Const GEBRUIKER_VARIABEL As String = "$$GEBRUIKER$$"       'Indien aanwezig in de verbindingsinformatie geeft dit variabel de positie van de gebruikersnaam aan.
 Public Const GEEN_PARAMETER As Long = -1                          'Staat voor "geen parameter".
 Public Const WACHTWOORD_VARIABEL As String = "$$WACHTWOORD$$"     'Indien aanwezig in de verbindingsinformatie geeft dit variabel de positie van het wachtwoord aan.
-Private Const ASCII_A As Long = 65                                 'De ASCII waarde voor het teken "A".
-Private Const ASCII_Z As Long = 90                                 'De ASCII waarde voor het teken "Z".
+Private Const ASCII_A As Long = 65                                 'De ASCII-waarde voor het teken "A".
+Private Const ASCII_Z As Long = 90                                 'De ASCII-waarde voor het teken "Z".
 Private Const COMMENTAAR_TEKEN As String = "#"                     'Geeft aan dat een regel in een instellingenbestand commentaar is.
 Private Const DEFINITIE_TEKENS As String = "$$"                    'Geeft het begin en het einde van een parameterdefinitie binnen een query aan.
 Private Const ELEMENT_TEKEN As String = ":"                        'Scheidt de parameter definitie elementen van elkaar.
 Private Const EXCEL_MAXIMUM_AANTAL_KOLOMMEN As Long = 255          'Het maximale aantal door Microsoft Excel ondersteunde kolommen.
-Private Const GEEN_LETTER As Long = 64                             'Staat voor "geen letter". (De ASCII waarde die voor het "A" teken komt.)
+Private Const GEEN_LETTER As Long = 64                             'Staat voor "geen letter". (De ASCII-waarde die voor het "A" teken komt.)
 Private Const GEEN_MAXIMUM As Long = -1                            'Staat voor "geen maximale kolom breedte of maximum aantal regels in voorbeeld".
 Private Const GEEN_RESULTAAT As Long = -1                          'Staat voor "geen queryresultaat".
 Private Const MASKER_CIJFER As String = "#"                        'Geeft in een masker aan dat er een cijfer als invoer wordt verwacht.
@@ -134,10 +134,10 @@ Private Const ONBEKEND_AANTAL As Long = -1                         'Staat voor "
 Private Const PARAMETER_TEKEN As String = "?"                      'Scheidt de opdrachtregelparameters van elkaar.
 Private Const SECTIE_NAAM_BEGIN As String = "["                    'Geeft het begin van een sectie naam in een instellingenbestand aan.
 Private Const SECTIE_NAAM_EINDE As String = "]"                    'Geeft het einde van een sectie naam in een instellingenbestand aan.
-Private Const SQL_COMMENTAAR_BLOK_BEGIN As String = "/*"           'Staat voor het begin van een SQL commentaarblok.
-Private Const SQL_COMMENTAAR_BLOK_EINDE As String = "*/"           'Staat voor het einde van een SQL commentaarblok.
-Private Const SQL_COMMENTAAR_REGEL_BEGIN As String = "--"          'Staat voor het begin van een SQL commentaarregel.
-Private Const SQL_COMMENTAAR_REGEL_EINDE As String = vbNullString  'Staat voor het einde van een SQL commentaarregel.
+Private Const SQL_COMMENTAAR_BLOK_BEGIN As String = "/*"           'Staat voor het begin van een SQL-commentaarblok.
+Private Const SQL_COMMENTAAR_BLOK_EINDE As String = "*/"           'Staat voor het einde van een SQL-commentaarblok.
+Private Const SQL_COMMENTAAR_REGEL_BEGIN As String = "--"          'Staat voor het begin van een SQL-commentaarregel.
+Private Const SQL_COMMENTAAR_REGEL_EINDE As String = vbNullString  'Staat voor het einde van een SQL-commentaarregel.
 Private Const SYMBOOL_TEKEN As String = "*"                        'Geeft het begin en het einde van een symbool in een tekst aan.
 Private Const TEKENREEKS_TEKENS As String = "'"""                  'Staat voor de tekens die het begin en einde van een tekenreeks aanduiden.
 Private Const VARIABELE_LENGTE_TEKEN As String = "*"               'Indien aanwezig aan het begin van een masker geeft dit teken aan dat de invoer lengte variabel is.
@@ -246,7 +246,7 @@ Fout:
    If HandelFoutAf() = vbRetry Then Resume
 End Sub
 
-'Deze procedure controleert of er een fout is opgetreden tijdens de recenste API functie aanroep.
+'Deze procedure controleert of er een fout is opgetreden tijdens de recenste API-functie aanroep.
 Public Function ControleerOpAPIFout(TerugGestuurd As Long, Optional ExtraInformatie As String = vbNullString) As Long
 Dim Bericht As String
 Dim FoutCode As Long
@@ -869,7 +869,7 @@ Fout:
 End Function
 
 
-'Deze procedure maakt de opgegeven fout omschrijving op.
+'Deze procedure maakt de opgegeven foutomschrijving op.
 Private Function MaakFoutOmschrijvingOp(FoutOmschrijving As String) As String
 On Error Resume Next
 Dim Omschrijving As String
@@ -1351,7 +1351,7 @@ Fout:
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
-'Deze procedure handelt eventuele queryresultaat lees fouten af.
+'Deze procedure handelt eventuele queryresultaat leesfouten af.
 Public Function QueryResultaatLeesFout(Optional Rij As Long = 0, Optional Kolom As Long = 0, Optional KolomNaam As String = vbNullString, Optional VraagVorigeKeuzeOp As Boolean = True) As Long
 Dim Bericht As String
 Dim Bron As String
@@ -1985,7 +1985,7 @@ Fout:
    If HandelFoutAf() = vbRetry Then Resume
 End Function
 
-'Deze procedure verwerkt de opgegeven sessie lijst.
+'Deze procedure verwerkt de opgegeven sessielijst.
 Public Function VerwerkSessieLijst(Optional SessieLijstPad As String = vbNullString) As String
 On Error GoTo Fout
 Dim BestandHandle As Long
